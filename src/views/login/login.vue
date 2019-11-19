@@ -23,26 +23,26 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
 .login-container {
-  display: flex;/*弹性布局*/
-  align-items: center;/* 上下居中 */
+  display: flex; /*弹性布局*/
+  align-items: center; /* 上下居中 */
   justify-content: space-around; /* 盒子左右的距离平分 */
   width: 100%;
   height: 100%;
   background: linear-gradient(
-    225deg, rgba(1, 198, 250, 1), rgba(20, 147, 250, 1)
+    225deg,
+    rgba(1, 198, 250, 1),
+    rgba(20, 147, 250, 1)
   );
-}
-
-.left-form {
-  width: 478px;
-  height: 550px;
-  background-color: #f5f5f5;
-}
-
-.banner {
-  width: 633px;
-  height: 435px;
+  .left-form {
+    width: 478px;
+    height: 550px;
+    background-color: #f5f5f5;
+  }
+  .banner {
+    width: 633px;
+    height: 435px;
+  }
 }
 </style>>
