@@ -3,14 +3,34 @@
     <!-- 左侧form -->
     <div class="left-form">
       <div class="title">
-        <img src alt />
-        <span>黑马面面</span>
-        <span>|</span>
-        <span>用户登录</span>
+        <img class="login-logo" src="../../assets/login_icon.png" alt />
+        <span class="hm-wrod">黑马面面</span>
+        <span class="line">|</span>
+        <span class="log-wrod">用户登录</span>
       </div>
-      <input type="text" />
-      <input type="text" />
-      <input type="text" />
+      <!-- 用户输入框 Elui-->
+      <el-input class="inpu-phone" placeholder="请输入手机号" prefix-icon="el-icon-user" v-model="input2"></el-input>
+      <el-input
+        class="inpu-password"
+        placeholder="请输入密码"
+        prefix-icon="el-icon-lock"
+        v-model="input2"
+      ></el-input>
+      <el-input
+        class="inpu-captcha"
+        placeholder="请输入验证码"
+        prefix-icon="el-icon-key"
+        v-model="input2"
+      ></el-input>
+      <!-- 复选框+文字连接 Elui-->
+      <el-checkbox class="checkbox">
+        我已阅读并同意
+        <el-link type="primary">用户协议</el-link>和
+        <el-link type="primary">隐私条款</el-link>
+      </el-checkbox>
+      <!-- 按钮 -->
+      <el-button class="login-btn" type="primary">登录</el-button>
+      <el-button class="zc-btn" type="primary">注册</el-button>
     </div>
     <!-- 右侧图片 -->
     <img class="banner" src="../../assets/login_banner_ele.png" alt />
@@ -39,7 +59,58 @@ export default {
     width: 478px;
     height: 550px;
     background-color: #f5f5f5;
+    padding: 48px 42px;
+
+    .title {
+      .login-logo {
+        width: 22px;
+        height: 22px;
+        margin-right: 12px;
+      }
+
+      .line {
+        color: #c7c7c7;
+        font-size: 28px;
+        margin-right: 12px;
+      }
+
+      .hm-wrod {
+        font-size: 24px;
+        margin-right: 12px;
+      }
+
+      .log-wrod {
+        font-size: 22px;
+      }
+    }
+    .inpu-phone {
+      margin-top: 30px;
+    }
+    .inpu-password {
+      margin-top: 25px;
+    }
+    .inpu-captcha {
+      margin-top: 25px;
+    }
+    .checkbox {
+      color: #999999;
+      font-size: 14px;
+      display: flex;
+      align-items: center; //垂直居中
+      margin-top: 32px;
+      .el-checkbox__label {
+        display: flex;
+        align-items: center;
+      }
+    }
+    .el-button.el-button--primary {
+      display: block;
+      width: 100%;
+      margin: 27px 0;
+    }
+
   }
+
   .banner {
     width: 633px;
     height: 435px;
