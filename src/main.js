@@ -8,6 +8,8 @@ import router from "./router/router.js"
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
+// 三.导入全局css样式
+import "../src/style/base.css"
 
 
 
