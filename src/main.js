@@ -2,8 +2,14 @@ import Vue from 'vue'
 import App from './App.vue'
 Vue.config.productionTip = false
 
-// 一.从router文件里导入路由-7
+// 一.导入路由-7
 import router from "./router/router.js"
+// 二.导入Element-ui;
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
+
+
 
 // 
 new Vue({

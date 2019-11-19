@@ -1,5 +1,5 @@
 <template>
-  <router-view></router-view>
+  <el-button type="primary">主要按钮</el-button>
 </template>
 
 <script>
