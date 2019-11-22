@@ -9,28 +9,53 @@
         <span class="log-wrod">用户登录</span>
       </div>
       <!-- 用户输入框 Elui-->
-      <el-input class="inpu-phone" placeholder="请输入手机号" prefix-icon="el-icon-user" v-model="input2"></el-input>
-      <el-input
-        class="inpu-password"
-        placeholder="请输入密码"
-        prefix-icon="el-icon-lock"
-        v-model="input2"
-      ></el-input>
-      <el-input
-        class="inpu-captcha"
-        placeholder="请输入验证码"
-        prefix-icon="el-icon-key"
-        v-model="input2"
-      ></el-input>
-      <!-- 复选框+文字连接 Elui-->
-      <el-checkbox class="checkbox">
-        我已阅读并同意
-        <el-link type="primary">用户协议</el-link>和
-        <el-link type="primary">隐私条款</el-link>
-      </el-checkbox>
-      <!-- 按钮 -->
-      <el-button class="login-btn" type="primary">登录</el-button>
-      <el-button class="zc-btn" type="primary">注册</el-button>
+      <el-form :model="loginForm" :rules="loginRules" ref="loginForm" status-icon>
+        <!-- 手机号 -->
+        <el-form-item label prop="password">
+          <el-input
+            class="inpu-phone"
+            placeholder="请输入手机号"
+            prefix-icon="el-icon-user"
+            v-model="input2"
+          ></el-input>
+          <!-- 密码 -->
+          <el-form-item label prop="password">
+            <el-input
+              class="inpu-password"
+              placeholder="请输入密码"
+              prefix-icon="el-icon-lock"
+              v-model="input2"
+            ></el-input>
+          </el-form-item>
+
+          <!-- 验证码 -->
+        </el-form-item>
+        <el-form-item label prop="captcha">
+          <el-row class="inpu-captcha">
+            <el-col :span="16">
+              <el-input
+                class="capVal"
+                placeholder="请输入验证码"
+                prefix-icon="el-icon-key"
+                v-model="input2"
+              ></el-input>
+            </el-col>
+            <el-col :span="8">
+              <img class="capImg" src="../../assets/captcha.png" alt />
+            </el-col>
+          </el-row>
+        </el-form-item>
+
+        <!-- 复选框+文字连接 Elui-->
+        <el-checkbox class="checkbox">
+          我已阅读并同意
+          <el-link type="primary">用户协议</el-link>和
+          <el-link type="primary">隐私条款</el-link>
+        </el-checkbox>
+        <!-- 按钮 -->
+        <el-button class="login-btn" type="primary">登录</el-button>
+        <el-button class="zc-btn" type="primary">注册</el-button>
+      </el-form>
     </div>
     <!-- 右侧图片 -->
     <img class="banner" src="../../assets/login_banner_ele.png" alt />
@@ -91,6 +116,10 @@ export default {
     }
     .inpu-captcha {
       margin-top: 25px;
+      .capImg {
+        width: 100%;
+        height: 42px;
+      }
     }
     .checkbox {
       color: #999999;
@@ -108,7 +137,6 @@ export default {
       width: 100%;
       margin: 27px 0;
     }
-
   }
 
   .banner {
