@@ -2,6 +2,7 @@
   <div class="login-container">
     <!-- 左侧form -->
     <div class="left-form">
+      <!-- 标题 -->
       <div class="title">
         <img class="login-logo" src="../../assets/login_icon.png" alt />
         <span class="hm-wrod">黑马面面</span>
@@ -11,25 +12,26 @@
       <!-- 用户输入框 Elui-->
       <el-form :model="loginForm" :rules="loginRules" ref="loginForm" status-icon>
         <!-- 手机号 -->
-        <el-form-item label prop="password">
+        <el-form-item label prop="phone">
           <el-input
             class="inpu-phone"
             placeholder="请输入手机号"
             prefix-icon="el-icon-user"
-            v-model="input2"
+            v-model="loginForm.phone"
           ></el-input>
-          <!-- 密码 -->
-          <el-form-item label prop="password">
-            <el-input
-              class="inpu-password"
-              placeholder="请输入密码"
-              prefix-icon="el-icon-lock"
-              v-model="input2"
-            ></el-input>
-          </el-form-item>
-
-          <!-- 验证码 -->
         </el-form-item>
+
+        <!-- 密码 -->
+        <el-form-item label prop="password">
+          <el-input
+            class="inpu-password"
+            placeholder="请输入密码"
+            prefix-icon="el-icon-lock"
+            v-model="loginForm.password"
+          ></el-input>
+        </el-form-item>
+
+        <!-- 验证码 -->
         <el-form-item label prop="captcha">
           <el-row class="inpu-captcha">
             <el-col :span="16">
@@ -37,23 +39,23 @@
                 class="capVal"
                 placeholder="请输入验证码"
                 prefix-icon="el-icon-key"
-                v-model="input2"
+                v-model="loginForm.captcha"
               ></el-input>
             </el-col>
             <el-col :span="8">
-              <img class="capImg" src="../../assets/captcha.png" alt />
+              <img class="capImg" :src="captchaSrc" @click="changeCaptcha" />
             </el-col>
           </el-row>
         </el-form-item>
 
-        <!-- 复选框+文字连接 Elui-->
-        <el-checkbox class="checkbox">
+        <!-- 协议-->
+        <el-checkbox class="checkbox" v-model="checked">
           我已阅读并同意
           <el-link type="primary">用户协议</el-link>和
           <el-link type="primary">隐私条款</el-link>
         </el-checkbox>
         <!-- 按钮 -->
-        <el-button class="login-btn" type="primary">登录</el-button>
+        <el-button class="login-btn" type="primary" @click="submitClick('loginForm')">登录</el-button>
         <el-button class="zc-btn" type="primary">注册</el-button>
       </el-form>
     </div>
@@ -63,8 +65,79 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "login"
+  name: "login",
+  data() {
+    const checkPhone = (rules, value, callback) => {
+      if (!value) {
+        callback(new Error("手机号码不能为空"));
+      } else {
+        const reg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+        if (reg.test(value)) {
+          callback();
+        } else {
+          callback(new Error("手机号码格式不对哦"));
+        }
+      }
+    };
+    return {
+      //登录大表单
+      loginForm: {
+        phone: "",
+        password: "",
+        captcha: ""
+      },
+      loginRules: {
+        phone: [{ validator: checkPhone }],
+        password: [
+          { required: true, message: "密码不能为空" },
+          { min: 6, max: 12, message: "密码强度不够" }
+        ],
+        captcha: [
+          { required: true, message: "验证码不能为空" },
+          { min: 4, max: 4, message: "请输入4位验证码" }
+        ]
+      },
+      captchaSrc: "http://183.237.67.218:3002/captcha?type=login",
+      checked: true
+    };
+  },
+  methods: {
+    changeCaptcha() {
+      this.captchaSrc = `http://183.237.67.218:3002/captcha?type=login&${Date.now()}`;
+      //点击登录
+    },
+    submitClick(loginForm) {
+      if (!this.checked) {
+        this.$message.warning("请勾选用户协议");
+        return;
+      }
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          axios({
+            method: "post",
+            url: "http://183.237.67.218:3002/login",
+            data: {
+              phone:this.loginForm.phone,
+              password:this.loginForm.password,
+              code:this.loginForm.captcha
+            },
+            withCredentials:true
+          }).then(res => {
+            console.log(res);
+            if (res.data.code===200) {
+              this.$message.success('登录成功')
+            }else{
+              this.$message.warning('登录失败')
+            }
+          });
+        }else{
+          return false;
+        }
+      });
+    }
+  }
 };
 </script>
 
