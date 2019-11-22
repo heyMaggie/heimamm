@@ -11,12 +11,26 @@ Vue.use(VueRouter)
 import login from "../views/login/login.vue"
 //02-登录组件
 import index from "../views/index/index.vue"
+import date from "../views/index/date/date.vue"
+import userlist from "../views/index/userlist/userlist.vue"
 
 
 // 4-路由规则
 const routes = [
     { path: '/login', component: login },//登录页规则
-    { path: '/index', component: index },//首页规则
+    {
+        path: '/index', component: index,
+        children: [
+            {
+                path: 'date',
+                component: date
+            },
+            {
+                path: 'userlist',
+                component: userlist
+            },
+        ]
+    },//首页规则
 ]
 
 // 5-实例路由
