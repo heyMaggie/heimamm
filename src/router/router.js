@@ -7,11 +7,16 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 // 3-导入组件
+//01-首页组件
 import login from "../views/login/login.vue"
+//02-登录组件
+import index from "../views/index/index.vue"
+
 
 // 4-路由规则
 const routes = [
-    { path: '/login', component: login },
+    { path: '/login', component: login },//登录页规则
+    { path: '/index', component: index },//首页规则
 ]
 
 // 5-实例路由
