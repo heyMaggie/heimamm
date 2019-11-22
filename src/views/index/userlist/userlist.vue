@@ -1,5 +1,5 @@
 <template>
-  <div class="two">这是首页的数据页面</div>
+  <div class="two">这是用户列表页面</div>
 </template>
 
 <script>

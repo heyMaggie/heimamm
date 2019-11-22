@@ -13,11 +13,14 @@ import login from "../views/login/login.vue"
 import index from "../views/index/index.vue"
 import date from "../views/index/date/date.vue"
 import userlist from "../views/index/userlist/userlist.vue"
+import item from "../views/index/item/item.vue"
+import enterprise from "../views/index/enterprise/enterprise.vue"
+import subject from "../views/index/subject/subject.vue"
 
 
 // 4-路由规则
 const routes = [
-    { path: '/login', component: login },//登录页规则
+    { path: '/login', componenterprise: login },//登录页规则
     {
         path: '/index', component: index,
         children: [
@@ -28,6 +31,18 @@ const routes = [
             {
                 path: 'userlist',
                 component: userlist
+            },
+            {
+                path: 'item',
+                component: item
+            },
+            {
+                path: 'enterprise',
+                component: enterprise
+            },
+            {
+                path: 'subject',
+                component: subject
             },
         ]
     },//首页规则

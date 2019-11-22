@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <el-header class="header">
       <div class="left">
-        <i class="el-icon-s-fold"></i>
+        <i class="el-icon-s-fold" @click="isCollapse = !isCollapse" :class="{rotate:isCollapse}"></i>
         <img src="../../assets/hmlogo.png" alt />
         <span class="title">黑马面面</span>
       </div>
@@ -16,8 +16,8 @@
 
     <!-- 左侧 -->
     <el-container class="subContainer">
-      <el-aside width="200px" class="aside">
-        <el-menu default-active="5" class="el-menu-vertical-demo" router>
+      <el-aside width=auto class="aside">
+        <el-menu :collapse="isCollapse" default-active="5" class="el-menu-vertical-demo" router>
           <el-menu-item index="date">
             <i class="el-icon-pie-chart"></i>
             <span slot="title">数据概览</span>
@@ -26,15 +26,15 @@
             <i class="el-icon-user"></i>
             <span slot="title">用户列表</span>
           </el-menu-item>
-          <el-menu-item index="3">
+          <el-menu-item index="item">
             <i class="el-icon-edit-outline"></i>
             <span slot="title">题库列表</span>
           </el-menu-item>
-          <el-menu-item index="4">
+          <el-menu-item index="enterprise">
             <i class="el-icon-office-building"></i>
             <span slot="title">企业列表</span>
           </el-menu-item>
-          <el-menu-item index="5">
+          <el-menu-item index="subject">
             <i class="el-icon-notebook-2"></i>
             <span slot="title">学科列表</span>
           </el-menu-item>
@@ -49,7 +49,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+    name:"index",
+    data() {
+        return {
+            isCollapse: false,
+        }
+    },
+};
 </script>
 
 <style lang="less">
@@ -105,4 +112,15 @@ body,
     }
   }
 }
+ .el-menu-vertical-demo:not(.el-menu--collapse) {
+            width: 200px;
+            min-height: 400px;
+        }
+        .el-icon-s-fold{
+            font-size: 40px;
+            transition: .5s;
+        }
+        .rotate {
+            transform: rotate(-90deg);
+        }
 </style>>
