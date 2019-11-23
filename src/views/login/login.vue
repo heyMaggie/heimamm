@@ -66,6 +66,7 @@
 
 <script>
 import axios from "axios";
+import {setToken} from '../../utils/token.js'
 export default {
   name: "login",
   data() {
@@ -128,6 +129,9 @@ export default {
             console.log(res);
             if (res.data.code===200) {
               this.$message.success('登录成功')
+              //跳转
+              this.$router.push('/index');
+              setToken(res.data.data.token)
             }else{
               this.$message.warning('登录失败')
             }
