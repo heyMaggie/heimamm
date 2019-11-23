@@ -113,7 +113,7 @@ export default {
         this.$message.warning("请勾选用户协议");
         return;
       }
-      this.$refs[formName].validate(valid => {
+      this.$refs[loginForm].validate(valid => {
         if (valid) {
           axios({
             method: "post",
